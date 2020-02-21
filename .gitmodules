@@ -1,3 +1,6 @@
 [submodule "Fruit-Images-Dataset"]
 	path = Fruit-Images-Dataset
 	url = https://github.com/Horea94/Fruit-Images-Dataset.git
+[submodule "Haar-Cascade-Classifiers"]
+	path = Haar-Cascade-Classifiers
+	url = https://github.com/sherrardTr4129/Haar-Cascade-Classifiers
