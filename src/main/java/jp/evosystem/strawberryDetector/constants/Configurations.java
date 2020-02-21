@@ -13,9 +13,14 @@ public interface Configurations {
 	String CLASSIFIER_FILE_PATH = "Haar-Cascade-Classifiers/strawberry_classifier.xml";
 
 	/**
+	 * <code>ObjectFinder</code>用の物体画像のファイルのパス.
+	 */
+	String OBJECT_FINDEROBJECT_IMAGE_FILE_PATH = "Fruit-Images-Dataset/Training/Strawberry/0_100.jpg";
+
+	/**
 	 * 対象の画像ファイルのパス.
 	 */
-	String TARGET_IMAGE_FILE_PATH = "images/Strawberry-Benefits.jpg";
+	String TARGET_IMAGE_FILE_PATH = "images/example_02.jpg";
 
 	/**
 	 * 対象の動画ファイルのパス.

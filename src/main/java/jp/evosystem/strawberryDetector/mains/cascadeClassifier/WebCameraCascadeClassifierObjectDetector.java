@@ -14,7 +14,7 @@ import jp.evosystem.strawberryDetector.constants.Configurations;
  *
  * @author evosystem
  */
-public class WebCameraObjectDetector extends AbstractCascadeClassifierObjectDetector {
+public class WebCameraCascadeClassifierObjectDetector extends AbstractCascadeClassifierObjectDetector {
 
 	/**
 	 * main.
