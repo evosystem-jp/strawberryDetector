@@ -1,4 +1,4 @@
-package jp.evosystem.strawberryDetector.mains.cascadeClassifier;
+package jp.evosystem.strawberryDetector.detectors;
 
 import static org.bytedeco.opencv.global.opencv_imgproc.*;
 
@@ -12,28 +12,27 @@ import org.bytedeco.opencv.opencv_objdetect.CascadeClassifier;
 import jp.evosystem.strawberryDetector.constants.Configurations;
 
 /**
- * 画像から物体を検出.
+ * CascadeClassifierによる物体検出.
  *
  * @author evosystem
  */
-public abstract class AbstractCascadeClassifierObjectDetector {
+public class JavacvCascadeClassifierObjectDetector extends ObjectDetector {
 
 	/**
 	 * 検出器.
 	 */
 	private static CascadeClassifier cascadeClassifier;
 
-	static {
+	/**
+	 * コンストラクタ.
+	 */
+	public JavacvCascadeClassifierObjectDetector() {
 		// 検出器を作成
-		cascadeClassifier = new CascadeClassifier(Configurations.CLASSIFIER_FILE_PATH);
+		cascadeClassifier = new CascadeClassifier(Configurations.JAVACV_CASCADE_CLASSIFIER_FILE_PATH);
 	}
 
-	/**
-	 * 画像処理.
-	 *
-	 * @param targetImageMat
-	 */
-	protected static void processTargetImage(Mat targetImageMat) {
+	@Override
+	public void processTargetImage(Mat targetImageMat) {
 		// 検出結果
 		RectVector rectVector = new RectVector();
 

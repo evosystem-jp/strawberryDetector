@@ -1,4 +1,4 @@
-package jp.evosystem.strawberryDetector.mains.cascadeClassifier;
+package jp.evosystem.strawberryDetector.mains;
 
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.Frame;
@@ -8,13 +8,15 @@ import org.bytedeco.javacv.OpenCVFrameConverter;
 import org.bytedeco.opencv.opencv_core.Mat;
 
 import jp.evosystem.strawberryDetector.constants.Configurations;
+import jp.evosystem.strawberryDetector.detectors.ObjectDetector;
+import jp.evosystem.strawberryDetector.utils.ObjectDetectorHelper;
 
 /**
  * Webカメラ画像から物体を検出.
  *
  * @author evosystem
  */
-public class WebCameraCascadeClassifierObjectDetector extends AbstractCascadeClassifierObjectDetector {
+public class WebCameraObjectDetection {
 
 	/**
 	 * main.
@@ -23,6 +25,9 @@ public class WebCameraCascadeClassifierObjectDetector extends AbstractCascadeCla
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
+		// 検出器のインスタンスを取得
+		ObjectDetector objectDetector = ObjectDetectorHelper.getObjectDetector();
+
 		// Webカメラから映像取得
 		try (FrameGrabber frameGrabber = FrameGrabber.createDefault(Configurations.TARGET_DEVICE_NUMBER)) {
 			frameGrabber.start();
@@ -39,7 +44,7 @@ public class WebCameraCascadeClassifierObjectDetector extends AbstractCascadeCla
 			// 画面が表示中の間ループ
 			while (canvasFrame.isVisible() && (grabbedImage = converter.convert(frameGrabber.grab())) != null) {
 				// 画像処理
-				processTargetImage(grabbedImage);
+				objectDetector.processTargetImage(grabbedImage);
 
 				// フレームを作成
 				Frame frame = converter.convert(grabbedImage);

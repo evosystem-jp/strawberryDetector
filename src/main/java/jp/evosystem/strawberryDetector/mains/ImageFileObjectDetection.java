@@ -1,4 +1,4 @@
-package jp.evosystem.strawberryDetector.mains.cascadeClassifier;
+package jp.evosystem.strawberryDetector.mains;
 
 import java.io.File;
 
@@ -10,13 +10,15 @@ import org.bytedeco.opencv.global.opencv_imgcodecs;
 import org.bytedeco.opencv.opencv_core.Mat;
 
 import jp.evosystem.strawberryDetector.constants.Configurations;
+import jp.evosystem.strawberryDetector.detectors.ObjectDetector;
+import jp.evosystem.strawberryDetector.utils.ObjectDetectorHelper;
 
 /**
  * 画像内の物体を検出.
  *
  * @author evosystem
  */
-public class ImageFileCascadeClassifierObjectDetector extends AbstractCascadeClassifierObjectDetector {
+public class ImageFileObjectDetection {
 
 	/**
 	 * main.
@@ -24,6 +26,9 @@ public class ImageFileCascadeClassifierObjectDetector extends AbstractCascadeCla
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		// 検出器のインスタンスを取得
+		ObjectDetector objectDetector = ObjectDetectorHelper.getObjectDetector();
+
 		// 対象の画像ファイル
 		File targetImagefile = new File(Configurations.TARGET_IMAGE_FILE_PATH);
 
@@ -31,7 +36,7 @@ public class ImageFileCascadeClassifierObjectDetector extends AbstractCascadeCla
 		Mat targetImageMat = opencv_imgcodecs.imread(targetImagefile.getAbsolutePath());
 
 		// 画像処理
-		processTargetImage(targetImageMat);
+		objectDetector.processTargetImage(targetImageMat);
 
 		// 画像を表示
 		display(targetImageMat, "タイトル");

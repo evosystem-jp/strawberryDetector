@@ -1,4 +1,4 @@
-package jp.evosystem.strawberryDetector.mains.objectFinder;
+package jp.evosystem.strawberryDetector.detectors;
 
 import static org.bytedeco.opencv.global.opencv_imgproc.*;
 
@@ -14,22 +14,25 @@ import org.bytedeco.opencv.opencv_core.Scalar;
 import jp.evosystem.strawberryDetector.constants.Configurations;
 
 /**
- * 画像から物体を検出.
+ * ObjectFinderによる物体検出.
  *
  * @see <a href="http://javacv.ru/javacv-objectfinder/">Javacv ObjectFinder.
  *      Поиск шаблона</a>
  * @author evosystem
  */
-public abstract class AbstractObjectFinderObjectDetector {
+public class JavacvObjectFinderObjectDetector extends ObjectDetector {
 
 	/**
 	 * 検出器.
 	 */
 	private static ObjectFinder objectFinder;
 
-	static {
+	/**
+	 * コンストラクタ.
+	 */
+	public JavacvObjectFinderObjectDetector() {
 		// 対象の画像ファイルを読み込み
-		IplImage targetImage = opencv_imgcodecs.cvLoadImage(Configurations.OBJECT_FINDEROBJECT_IMAGE_FILE_PATH);
+		IplImage targetImage = opencv_imgcodecs.cvLoadImage(Configurations.JAVACV_OBJECT_FINDER_OBJECT_IMAGE_FILE_PATH);
 
 		// 検出器を作成
 		ObjectFinder.Settings settings = new ObjectFinder.Settings();
@@ -47,7 +50,8 @@ public abstract class AbstractObjectFinderObjectDetector {
 	 * @see org.bytedeco.opencv.global.opencv_core#cvarrToMat(CvArr)
 	 * @param targetImageMat
 	 */
-	protected static void processTargetImage(Mat targetImageMat) {
+	@Override
+	public void processTargetImage(Mat targetImageMat) {
 		// 検出器で検出
 		long start = System.currentTimeMillis();
 		double[] dst_corners = objectFinder.find(opencv_core.cvIplImage(targetImageMat));

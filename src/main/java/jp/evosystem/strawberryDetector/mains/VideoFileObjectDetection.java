@@ -1,4 +1,4 @@
-package jp.evosystem.strawberryDetector.mains.objectFinder;
+package jp.evosystem.strawberryDetector.mains;
 
 import java.io.File;
 
@@ -11,13 +11,15 @@ import org.bytedeco.javacv.OpenCVFrameConverter;
 import org.bytedeco.opencv.opencv_core.Mat;
 
 import jp.evosystem.strawberryDetector.constants.Configurations;
+import jp.evosystem.strawberryDetector.detectors.ObjectDetector;
+import jp.evosystem.strawberryDetector.utils.ObjectDetectorHelper;
 
 /**
  * 動画内の物体を検出.
  *
  * @author evosystem
  */
-public class VideoFileObjectFinderObjectDetector extends AbstractObjectFinderObjectDetector {
+public class VideoFileObjectDetection {
 
 	/**
 	 * main.
@@ -26,6 +28,9 @@ public class VideoFileObjectFinderObjectDetector extends AbstractObjectFinderObj
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
+		// 検出器のインスタンスを取得
+		ObjectDetector objectDetector = ObjectDetectorHelper.getObjectDetector();
+
 		// 対象の動画ファイル
 		File targetVideofile = new File(Configurations.TARGET_VIDEO_FILE_PATH);
 
@@ -53,7 +58,7 @@ public class VideoFileObjectFinderObjectDetector extends AbstractObjectFinderObj
 				// 動画のフレームが存在する場合のみ処理を実行
 				if (grabbedImage != null) {
 					// 画像処理
-					processTargetImage(grabbedImage);
+					objectDetector.processTargetImage(grabbedImage);
 
 					// フレームを作成
 					Frame frame = converter.convert(grabbedImage);
