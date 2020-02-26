@@ -17,7 +17,7 @@ import ai.djl.translate.TranslateException;
  *
  * @author evosystem
  */
-public class DjlSingleShotObjectDetector extends ObjectDetector {
+public class DjlZooModelSingleShotObjectDetector extends ObjectDetector {
 
 	/**
 	 * Predictor.
@@ -29,7 +29,7 @@ public class DjlSingleShotObjectDetector extends ObjectDetector {
 	 *
 	 * @throws Exception
 	 */
-	public DjlSingleShotObjectDetector() throws Exception {
+	public DjlZooModelSingleShotObjectDetector() throws Exception {
 		Criteria<BufferedImage, DetectedObjects> criteria = Criteria.builder()
 				.optApplication(Application.CV.OBJECT_DETECTION)
 				.setTypes(BufferedImage.class, DetectedObjects.class)

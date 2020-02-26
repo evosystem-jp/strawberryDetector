@@ -1,6 +1,6 @@
 package jp.evosystem.strawberryDetector.constants;
 
-import jp.evosystem.strawberryDetector.detectors.DjlSingleShotObjectDetector;
+import jp.evosystem.strawberryDetector.detectors.DjlZooModelSingleShotObjectDetector;
 import jp.evosystem.strawberryDetector.detectors.ObjectDetector;
 
 /**
@@ -11,9 +11,14 @@ import jp.evosystem.strawberryDetector.detectors.ObjectDetector;
 public interface Configurations {
 
 	/**
+	 * デバッグモードを有効化するかどうか.
+	 */
+	boolean ENABLE_DEBUG_MODE = false;
+
+	/**
 	 * 使用する検出器のクラス.
 	 */
-	Class<? extends ObjectDetector> USE_OBJECT_DETECTOR_CLASS = DjlSingleShotObjectDetector.class;
+	Class<? extends ObjectDetector> USE_OBJECT_DETECTOR_CLASS = DjlZooModelSingleShotObjectDetector.class;
 
 	/**
 	 * <code>CascadeClassifier</code>用の検出器ファイルのパス.
@@ -24,6 +29,11 @@ public interface Configurations {
 	 * <code>ObjectFinder</code>用の物体画像のファイルのパス.
 	 */
 	String JAVACV_OBJECT_FINDER_OBJECT_IMAGE_FILE_PATH = "Fruit-Images-Dataset/Training/Strawberry/0_100.jpg";
+
+	/**
+	 * 処理結果をファイルに出力するかどうか.
+	 */
+	boolean ENABLE_RECORDING = true;
 
 	/**
 	 * 対象の画像ファイルのパス.

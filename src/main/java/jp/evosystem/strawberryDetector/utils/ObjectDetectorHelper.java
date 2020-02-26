@@ -1,7 +1,8 @@
 package jp.evosystem.strawberryDetector.utils;
 
 import jp.evosystem.strawberryDetector.constants.Configurations;
-import jp.evosystem.strawberryDetector.detectors.DjlSingleShotObjectDetector;
+import jp.evosystem.strawberryDetector.detectors.DjlOwnModelSingleShotObjectDetector;
+import jp.evosystem.strawberryDetector.detectors.DjlZooModelSingleShotObjectDetector;
 import jp.evosystem.strawberryDetector.detectors.JavacvCascadeClassifierObjectDetector;
 import jp.evosystem.strawberryDetector.detectors.JavacvObjectFinderObjectDetector;
 import jp.evosystem.strawberryDetector.detectors.JavacvYolo3ObjectDetector;
@@ -21,8 +22,10 @@ public class ObjectDetectorHelper {
 	 */
 	public static ObjectDetector getObjectDetector() {
 		try {
-			if (Configurations.USE_OBJECT_DETECTOR_CLASS == DjlSingleShotObjectDetector.class) {
-				return new DjlSingleShotObjectDetector();
+			if (Configurations.USE_OBJECT_DETECTOR_CLASS == DjlZooModelSingleShotObjectDetector.class) {
+				return new DjlZooModelSingleShotObjectDetector();
+			} else if (Configurations.USE_OBJECT_DETECTOR_CLASS == DjlOwnModelSingleShotObjectDetector.class) {
+				return new DjlOwnModelSingleShotObjectDetector();
 			} else if (Configurations.USE_OBJECT_DETECTOR_CLASS == JavacvObjectFinderObjectDetector.class) {
 				return new JavacvObjectFinderObjectDetector();
 			} else if (Configurations.USE_OBJECT_DETECTOR_CLASS == JavacvCascadeClassifierObjectDetector.class) {

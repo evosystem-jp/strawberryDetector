@@ -6,7 +6,7 @@ import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameGrabber;
-import org.bytedeco.javacv.FrameGrabber.Exception;
+import org.bytedeco.javacv.FrameRecorder;
 import org.bytedeco.javacv.OpenCVFrameConverter;
 import org.bytedeco.opencv.opencv_core.Mat;
 
@@ -41,42 +41,58 @@ public class VideoFileObjectDetection {
 			// 動画ファイルのフレームレートを取得
 			double frameRate = frameGrabber.getFrameRate();
 
-			// コンバーターを作成
-			OpenCVFrameConverter.ToMat converter = new OpenCVFrameConverter.ToMat();
+			// レコーダーを作成
+			try (FrameRecorder recorder = FrameRecorder.createDefault("target/VideoFileObjectDetection.mp4",
+					frameGrabber.getImageWidth(),
+					frameGrabber.getImageHeight())) {
+				// 録画を開始
+				if (Configurations.ENABLE_RECORDING) {
+					recorder.start();
+				}
 
-			// 画面を作成
-			CanvasFrame canvasFrame = new CanvasFrame("タイトル", CanvasFrame.getDefaultGamma() / frameGrabber.getGamma());
+				// コンバーターを作成
+				OpenCVFrameConverter.ToMat converter = new OpenCVFrameConverter.ToMat();
 
-			// 取得した映像データ
-			Mat grabbedImage;
+				// 画面を作成
+				CanvasFrame canvasFrame = new CanvasFrame("タイトル",
+						CanvasFrame.getDefaultGamma() / frameGrabber.getGamma());
 
-			// 画面が表示中の間ループ
-			while (canvasFrame.isVisible() && (frameGrabber.getFrameNumber() < frameGrabber.getLengthInFrames())) {
-				// 動画のフレームを取得
-				grabbedImage = converter.convert(frameGrabber.grab());
+				// 取得した映像データ
+				Mat grabbedImage;
 
-				// 動画のフレームが存在する場合のみ処理を実行
-				if (grabbedImage != null) {
-					// 画像処理
-					objectDetector.processTargetImage(grabbedImage);
-
-					// フレームを作成
-					Frame frame = converter.convert(grabbedImage);
-
-					// フレームを表示
-					canvasFrame.showImage(frame);
-
+				// 画面が表示中の間ループ
+				while (canvasFrame.isVisible() && (frameGrabber.getFrameNumber() < frameGrabber.getLengthInFrames())) {
 					try {
-						// フレームレートに応じて適切にウエイトを行う
-						Thread.sleep((int) (1000 / frameRate));
+						// 動画のフレームを取得
+						grabbedImage = converter.convert(frameGrabber.grab());
+
+						// 動画のフレームが存在する場合のみ処理を実行
+						if (grabbedImage != null) {
+							// 画像処理
+							objectDetector.processTargetImage(grabbedImage);
+
+							// フレームを作成
+							Frame frame = converter.convert(grabbedImage);
+
+							// フレームを表示
+							canvasFrame.showImage(frame);
+
+							// フレームを録画
+							if (Configurations.ENABLE_RECORDING) {
+								recorder.record(frame);
+							}
+
+							// フレームレートに応じて適切にウエイトを行う
+							Thread.sleep((int) (1000 / frameRate));
+						}
 					} catch (InterruptedException e) {
-						// NOP
+						e.printStackTrace();
 					}
 				}
-			}
 
-			// 画面を閉じる
-			canvasFrame.dispose();
+				// 画面を閉じる
+				canvasFrame.dispose();
+			}
 		}
 	}
 }

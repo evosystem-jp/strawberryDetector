@@ -74,7 +74,7 @@ public final class TrainStrawberry {
 		TrainStrawberry.runExample(args);
 
 		// 物体検出を実行
-		predict("build/model", Configurations.TARGET_IMAGE_FILE_PATH);
+		predict(Arguments.parseArgs(args).getOutputDir(), Configurations.TARGET_IMAGE_FILE_PATH);
 	}
 
 	/**
@@ -205,7 +205,7 @@ public final class TrainStrawberry {
 	/**
 	 * @return
 	 */
-	private static Block getSsdTrainBlock() {
+	public static Block getSsdTrainBlock() {
 		int[] numFilters = { 16, 32, 64 };
 		SequentialBlock baseBlock = new SequentialBlock();
 		for (int numFilter : numFilters) {
@@ -237,7 +237,7 @@ public final class TrainStrawberry {
 	 * @param ssdTrain
 	 * @return
 	 */
-	private static Block getSsdPredictBlock(Block ssdTrain) {
+	public static Block getSsdPredictBlock(Block ssdTrain) {
 		// add prediction process
 		SequentialBlock ssdPredict = new SequentialBlock();
 		ssdPredict.add(ssdTrain);
