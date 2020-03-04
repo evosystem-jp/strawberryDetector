@@ -96,13 +96,6 @@ public final class TrainStrawberry {
 			RandomAccessDataset testDataset = getDataset(Dataset.Usage.TEST, arguments);
 
 			DefaultTrainingConfig config = setupTrainingConfig(arguments);
-			config.addTrainingListeners(
-					TrainingListener.Defaults.logging(
-							TrainStrawberry.class.getSimpleName(),
-							arguments.getBatchSize(),
-							(int) trainDataset.getNumIterations(),
-							(int) testDataset.getNumIterations(),
-							arguments.getOutputDir()));
 
 			ExampleTrainingResult result;
 			try (Trainer trainer = model.newTrainer(config)) {
@@ -196,10 +189,10 @@ public final class TrainStrawberry {
 	 */
 	private static DefaultTrainingConfig setupTrainingConfig(Arguments arguments) {
 		return new DefaultTrainingConfig(new SingleShotDetectionLoss())
-				.setBatchSize(arguments.getBatchSize())
 				.addEvaluator(new SingleShotDetectionAccuracy("classAccuracy"))
 				.addEvaluator(new BoundingBoxError("boundingBoxError"))
-				.optDevices(Device.getDevices(arguments.getMaxGpus()));
+				.optDevices(Device.getDevices(arguments.getMaxGpus()))
+				.addTrainingListeners(TrainingListener.Defaults.logging(arguments.getOutputDir()));
 	}
 
 	/**
