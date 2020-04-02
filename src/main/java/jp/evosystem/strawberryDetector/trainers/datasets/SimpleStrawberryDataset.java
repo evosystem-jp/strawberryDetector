@@ -113,7 +113,7 @@ public class SimpleStrawberryDataset extends RandomAccessDataset {
 
 	/** {@inheritDoc} */
 	@Override
-	public long size() {
+	protected long availableSize() {
 		return imagePaths.size();
 	}
 

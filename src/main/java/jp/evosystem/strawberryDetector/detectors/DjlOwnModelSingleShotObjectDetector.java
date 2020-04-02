@@ -7,10 +7,10 @@ import java.util.List;
 
 import ai.djl.Model;
 import ai.djl.inference.Predictor;
-import ai.djl.modality.cv.DetectedObjects;
 import ai.djl.modality.cv.ImageVisualization;
-import ai.djl.modality.cv.SingleShotDetectionTranslator;
+import ai.djl.modality.cv.output.DetectedObjects;
 import ai.djl.modality.cv.transform.ToTensor;
+import ai.djl.modality.cv.translator.SingleShotDetectionTranslator;
 import ai.djl.nn.Block;
 import ai.djl.translate.Pipeline;
 import ai.djl.translate.TranslateException;

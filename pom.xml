@@ -11,7 +11,7 @@
 		<java.version>1.8</java.version>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<djl.version>0.4.0-SNAPSHOT</djl.version>
+		<djl.version>0.5.0-SNAPSHOT</djl.version>
 	</properties>
 
 	<repositories>
@@ -67,7 +67,7 @@
 				for more MXNet library selection options -->
 			<groupId>ai.djl.mxnet</groupId>
 			<artifactId>mxnet-native-auto</artifactId>
-			<version>1.6.0-SNAPSHOT</version>
+			<version>1.7.0-a-SNAPSHOT</version>
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>

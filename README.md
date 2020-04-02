@@ -2,4 +2,4 @@
 
 ## Authors
 
-* **Evosystem, inc.**
+* **Evosystem, Inc.**

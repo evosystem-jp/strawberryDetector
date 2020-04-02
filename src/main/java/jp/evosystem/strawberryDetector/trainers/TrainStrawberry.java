@@ -28,11 +28,11 @@ import ai.djl.Model;
 import ai.djl.basicmodelzoo.cv.object_detection.ssd.SingleShotDetection;
 import ai.djl.inference.Predictor;
 import ai.djl.metric.Metrics;
-import ai.djl.modality.cv.DetectedObjects;
 import ai.djl.modality.cv.ImageVisualization;
 import ai.djl.modality.cv.MultiBoxDetection;
-import ai.djl.modality.cv.SingleShotDetectionTranslator;
+import ai.djl.modality.cv.output.DetectedObjects;
 import ai.djl.modality.cv.transform.ToTensor;
+import ai.djl.modality.cv.translator.SingleShotDetectionTranslator;
 import ai.djl.modality.cv.util.BufferedImageUtils;
 import ai.djl.ndarray.NDArray;
 import ai.djl.ndarray.NDList;
@@ -173,7 +173,7 @@ public final class TrainStrawberry {
 		Pipeline pipeline = new Pipeline(new ToTensor());
 		SimpleStrawberryDataset dataset = SimpleStrawberryDataset.builder()
 				.optUsage(usage)
-				.optMaxIteration(arguments.getMaxIterations())
+				.optLimit(arguments.getLimit())
 				.optPipeline(pipeline)
 				.setSampling(arguments.getBatchSize(), true)
 				.build();

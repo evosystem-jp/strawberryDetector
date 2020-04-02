@@ -4,8 +4,8 @@ import java.awt.image.BufferedImage;
 
 import ai.djl.Application;
 import ai.djl.inference.Predictor;
-import ai.djl.modality.cv.DetectedObjects;
 import ai.djl.modality.cv.ImageVisualization;
+import ai.djl.modality.cv.output.DetectedObjects;
 import ai.djl.repository.zoo.Criteria;
 import ai.djl.repository.zoo.ModelZoo;
 import ai.djl.repository.zoo.ZooModel;
