@@ -67,7 +67,7 @@
 				for more MXNet library selection options -->
 			<groupId>ai.djl.mxnet</groupId>
 			<artifactId>mxnet-native-auto</artifactId>
-			<version>1.7.0-backport</version>
+			<version>1.8.0</version>
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
