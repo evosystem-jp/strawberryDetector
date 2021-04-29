@@ -1,0 +1,25 @@
+version: 2
+updates:
+- package-ecosystem: maven
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "00:00"
+    timezone: Asia/Tokyo
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: ai.djl.mxnet:mxnet-engine
+    versions:
+    - 0.9.0
+  - dependency-name: ai.djl.mxnet:mxnet-model-zoo
+    versions:
+    - 0.9.0
+  - dependency-name: ai.djl:model-zoo
+    versions:
+    - 0.9.0
+  - dependency-name: ai.djl:basicdataset
+    versions:
+    - 0.9.0
+  - dependency-name: ai.djl:api
+    versions:
+    - 0.9.0
