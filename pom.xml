@@ -11,7 +11,7 @@
 		<java.version>1.8</java.version>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<djl.version>0.5.0</djl.version>
+		<djl.version>0.11.0</djl.version>
 	</properties>
 
 	<repositories>
