@@ -3,3 +3,7 @@
 *.iml
 build
 target
+/images/
+/videos/
+/yolo/
+/.sts4-cache/
