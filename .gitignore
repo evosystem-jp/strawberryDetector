@@ -1,9 +1,8 @@
-.DS_Store
-.idea
-*.iml
-build
-target
+/.project
+/.classpath
+/.settings/
+/target/
+/build/
 /images/
 /videos/
 /yolo/
-/.sts4-cache/
